@@ -25,8 +25,14 @@ def process_request(src_folder, dest_folder, regex_def='.*', sizes=SIZES):
     for size in sizes:
         for res_file in res_files[size]:
             folder_size = 'drawable-' + size
-            shutil.copy2(os.path.join(src_folder, folder_size, res_file),
-                os.path.join(dest_folder, folder_size, res_file))
+            src_file = os.path.join(src_folder, folder_size, res_file)
+            dest_file = os.path.join(dest_folder, folder_size, res_file)
+            try:
+                print('\nCOPYING {} IN {}'.format(src_file, dest_file))
+                shutil.copy2(src_file, dest_file)
+                print('SUCCESS!')
+            except IOError:
+                print('FAILURE!')
 
 def main():
     parser = argparse.ArgumentParser(description='A simple script to pick Android drawables from a folder and put them into your project.')
