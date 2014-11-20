@@ -26,6 +26,8 @@ def process_request(src_folder, dest_folder, regex_def='.*', sizes=SIZES):
         print ('No file found matching {}'.format(regex_def))
         exit(0)
     for size in sizes:
+        if size not in res_files:
+            continue
         for res_file in res_files[size]:
             folder_size = 'drawable-' + size
             src_file = os.path.join(src_folder, folder_size, res_file)
