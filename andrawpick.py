@@ -22,6 +22,9 @@ def filter_files(res_folder, regex, sizes):
 def process_request(src_folder, dest_folder, regex_def='.*', sizes=SIZES):
     filter_re = re.compile(regex_def, re.IGNORECASE)
     res_files = filter_files(src_folder, filter_re, sizes)
+    if not res_files:
+        print ('No file found matching {}'.format(regex_def))
+        exit(0)
     for size in sizes:
         for res_file in res_files[size]:
             folder_size = 'drawable-' + size
